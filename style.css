@@ -1,0 +1,291 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.contenitore {
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    padding: 0;
+    margin: 0;
+}
+
+.contenitore-header {
+    height: 15%;
+    background-color: #009688;
+}
+
+.contenitore-main {
+    height: 85%;
+    background-color: #D7DBD7;
+}
+
+.contenitore-app {
+    height: 95%;
+    width: 75%;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.utenti {
+    width: 30%;
+    height: 100%;
+    float: left;
+}
+
+.utenti-header {
+    height: 8%;
+    background-color: #EDEDED;
+    padding: 5px;
+    display: flex;
+    width: 100%;
+    border-right: 1px solid #E0E0E0;
+}
+
+.utenti-header-avatar {
+    height: 100%;
+    border-radius: 50%;
+}
+
+.utenti-header-avatar img {
+    object-fit: cover;
+    height: 100%;
+}
+
+.utenti-header-icone {
+    width: 85%;
+    height: 100%;
+    padding-left: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    color: gray;
+}
+
+.utenti-header-icone span.fa {
+    padding-left: 15px;
+}
+
+.utenti-notifiche {
+    height: 9%;
+    background-color: #9DE1FE;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+}
+
+.utenti-notifiche-avatar {
+    height: 80%;
+    border-radius: 50%;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #9DE1FE;
+}
+
+.utenti-notifiche-msg {
+    padding-left: 10px;
+}
+
+.utenti-ricerca {
+    height: 5%;
+    background-color: #F8F8F8;
+    width: 100%;
+    padding: 5px;
+    display: flex;
+    justify-content: center;
+    position: relative;
+}
+
+.utenti-ricerca span {
+    color: grey;
+    position: absolute;
+    color: lightgray;
+    position: absolute;
+    left: 8%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+
+.cerca {
+    border-radius: 21px;
+    border: none;
+    padding-left: 15px;
+    width: 100%;
+    padding-left: 90px;
+}
+
+.utenti-ricerca-avatar {
+    width: 15%;
+    height: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+
+.utenti-ricerca-avatar img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
+
+.utenti-lista {
+    height: 78%;
+    background-color: #FFFFFF;
+    overflow-y: scroll;
+}
+
+.utenti-lista-riga {
+    height: 12.5%;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+}
+
+.attivo {
+    background-color: #EDEDED;
+}
+
+.utenti-lista-avatar {
+    width: 20%;
+    height: 100%;
+    border-radius: 50%;
+}
+
+.utenti-lista-avatar img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
+
+.utenti-lista-msg {
+    padding-left: 10px;
+}
+
+.messaggi {
+    width: 70%;
+    height: 100%;
+    float: right;
+}
+
+.messaggi-header{
+    height: 8%;
+    background-color: #EDEDED;
+    display: flex;
+}
+
+.messaggi-header-sinistra {
+    width: 40%;
+    height: 100%;
+    height: 100%;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+}
+
+.messaggi-header-avatar {
+    width: 18%;
+    height: 100%;
+    border-radius: 50%;
+}
+
+.messaggi-header-avatar img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
+
+
+.messaggi-lista-msg {
+    padding-left: 10px;
+}
+
+.messaggi-header-icone {
+    width: 70%;
+    height: 100%;
+    padding-left: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    color: gray;
+}
+
+.messaggi-header-icone span.fa {
+    padding: 0 15px;
+}
+
+.messaggi-main{
+    height: 84%;
+    background-image: url(images/sfondowhastapp.png);
+    overflow-y: scroll;
+}
+
+.messaggi-footer{
+    height: 8%;
+    background-color: #EDEDED;
+    display: flex;
+}
+
+.messaggio {
+    border-radius: 7.5px;
+    max-width: 50%;
+    max-height: max-content;
+    padding: 15px;
+
+}
+
+.ricevuto {
+    float: left;
+    clear: both;
+    margin: 50px;
+}
+
+.spedito {
+    float: right;
+    clear: both;
+    margin: 50px;
+}
+
+.bianco {
+    background-color: #FFFFFF;
+}
+.verde {
+    background-color: #DCF8C6;
+}
+
+.emoticon {
+    height: 100%;
+    width: 10%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: grey;
+}
+
+.messaggio-dascrivere {
+    height: 100%;
+    width: 80%;
+    display: flex;
+}
+
+.messaggio-vocale {
+    height: 100%;
+    width: 10%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: grey;
+}
+
+.msg {
+    border-radius: 21px;
+    border: none;
+    padding-left: 15px;
+    width: 100%;
+    margin: 10px;
+}
