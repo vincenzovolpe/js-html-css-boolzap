@@ -16,6 +16,7 @@ $(document).ready(function() {
             risposta = $('.msg').val();
             message = "<div class='messaggio spedito verde'>" + risposta + "</div>";
             $(message).appendTo($('.messaggi-main'));
+            $(this).val('');
     	}
     });
 });
