@@ -8,8 +8,9 @@ $(document).ready(function() {
 
     var heightListaAvatar = $('.utenti-lista-avatar img').height();
     $('.utenti-header-avatar img').width(heightHeaderAvatar);
-    console.log(heightListaAvatar);
 
+    var heightListaAvatar = $('.messaggi-header-avatar-cerchio img').height();
+    $('.messaggi-header-avatar-cerchio img').width(heightHeaderAvatar);
 
 
     // Evento enter nell'input del messaggio
