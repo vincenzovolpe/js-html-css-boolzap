@@ -146,7 +146,7 @@
 
 .utenti-lista-riga {
     height: 12.5%;
-    padding: 5px;
+    padding: 15px;
     display: flex;
     align-items: center;
 }
@@ -192,7 +192,6 @@
 }
 
 .messaggi-header-avatar {
-    width: 18%;
     height: 100%;
     border-radius: 50%;
 }
@@ -236,28 +235,20 @@
 .messaggio {
     border-radius: 7.5px;
     max-width: 50%;
-    max-height: max-content;
     padding: 15px;
-
-}
-
-.ricevuto {
-    float: left;
-    clear: both;
     margin: 50px;
 }
 
 .spedito {
     float: right;
+    background-color: #DCF8C6;
     clear: both;
-    margin: 50px;
 }
 
-.bianco {
+.ricevuto {
+    float: left;
     background-color: #FFFFFF;
-}
-.verde {
-    background-color: #DCF8C6;
+    clear: both;
 }
 
 .emoticon {

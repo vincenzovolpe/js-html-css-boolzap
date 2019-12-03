@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    // Setto la width dell'avater present nelle notifiche
+    // Setto le width degli avater presenti nelle notifiche
     var heightNotificheAvatar = $('.utenti-notifiche-avatar').height();
     $('.utenti-notifiche-avatar').width(heightNotificheAvatar);
 
@@ -9,18 +9,53 @@ $(document).ready(function() {
     var heightListaAvatar = $('.utenti-lista-avatar img').height();
     $('.utenti-header-avatar img').width(heightHeaderAvatar);
 
-    var heightListaAvatar = $('.messaggi-header-avatar-cerchio img').height();
-    $('.messaggi-header-avatar-cerchio img').width(heightHeaderAvatar);
+    var heightListaAvatar = $('.messaggi-header-avatar img').height();
+    $('.messaggi-header-avatar img').width(heightHeaderAvatar);
+    // Fine settaggio delle larghezzhe
 
+    // Evento click sul microfono
+    $('.messaggio-vocale').click(function(){
+        invia_messaggio();
+        temporisposta();
+    });
 
-    // Evento enter nell'input del messaggio
+    // Evento enter nell'input del messaggio che mi crea il messaggio
     $('.msg').keypress(function(event){
-    	var keycode = (event.keyCode ? event.keyCode : event.which);
-    	if(keycode == '13'){
-            risposta = $('.msg').val();
-            message = "<div class='messaggio spedito verde'>" + risposta + "</div>";
-            $(message).appendTo($('.messaggi-main'));
-            $(this).val('');
+    	if(event.which == '13'){
+            invia_messaggio();
+            temporisposta();
     	}
     });
+
+    // Cambio icona del microfono in base al fatto che scrivo o meno nell'input del messaggio
+    $('.msg').keyup(function(event){
+        var risposta = $('.msg').val();
+        if (risposta.length != 0) {
+            $('.messaggio-vocale span').removeClass('fas fa-2x fa-microphone').addClass('fas fa-2x fa-paper-plane');
+        } else {
+            $('.messaggio-vocale span').addClass('fas fa-2x fa-microphone').removeClass('fas fa-2x fa-paper-plane');
+        }
+    });
+
 });
+
+var myVar;
+
+function temporisposta() {
+  myVar = setTimeout(inviarisposta, 1000);
+}
+
+function inviarisposta() {
+    message = "<div class='messaggio ricevuto bianco'>ok</div>";
+    $(message).appendTo($('.messaggi-main'));
+    $('.msg').val('');
+}
+
+function invia_messaggio() {
+    risposta = $('.msg').val();
+    if (risposta.length != 0) {
+        message = "<div class='messaggio spedito verde'>" + risposta + "</div>";
+        $(message).appendTo($('.messaggi-main'));
+        $('.msg').val('');
+    }
+}
