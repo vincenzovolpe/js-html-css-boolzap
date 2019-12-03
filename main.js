@@ -3,9 +3,12 @@ $(document).ready(function() {
     var heightNotificheAvatar = $('.utenti-notifiche-avatar').height();
     $('.utenti-notifiche-avatar').width(heightNotificheAvatar);
 
-    var heightHeaderAvatar = $('.utenti-header-avatar').height();
-    $('.utenti-header-avatar').width(heightHeaderAvatar);
-    console.log(heightHeaderAvatar);
+    var heightHeaderAvatar = $('.utenti-header-avatar img').height();
+    $('.utenti-header-avatar img').width(heightHeaderAvatar);
+
+    var heightListaAvatar = $('.utenti-lista-avatar img').height();
+    $('.utenti-header-avatar img').width(heightHeaderAvatar);
+    console.log(heightListaAvatar);
 
 
 
