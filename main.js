@@ -15,15 +15,15 @@ $(document).ready(function() {
 
     // Evento click sul microfono
     $('.messaggio-vocale').click(function(){
-        invia_messaggio();
-        temporisposta();
+        inviaMessaggio();
+        tempoRisposta();
     });
 
     // Evento enter nell'input del messaggio che mi crea il messaggio
     $('.msg').keypress(function(event){
     	if(event.which == '13'){
-            invia_messaggio();
-            temporisposta();
+            inviaMessaggio();
+            tempoRisposta();
     	}
     });
 
@@ -31,27 +31,36 @@ $(document).ready(function() {
     $('.msg').keyup(function(event){
         var risposta = $('.msg').val();
         if (risposta.length != 0) {
-            $('.messaggio-vocale span').removeClass('fas fa-2x fa-microphone').addClass('fas fa-2x fa-paper-plane');
+            $('.messaggio-vocale>span').removeClass('fas fa-microphone').addClass('fas fa-paper-plane');
         } else {
-            $('.messaggio-vocale span').addClass('fas fa-2x fa-microphone').removeClass('fas fa-2x fa-paper-plane');
+            $('.messaggio-vocale>span').addClass('fas fa microphone').removeClass('fas fa-paper-plane');
         }
     });
 
+    // Ricerca persone quando scrivo nell'input per la ricerca
+    $('.cerca').on("keyup", function(){
+    	var nomecercato = $('.cerca').val().toLowerCase();
+        console.log(nomecercato);
+
+        $('.utenti-lista-riga').filter(function() {
+            $(this).toggle($(this).text().toLowerCase().indexOf(nomecercato) > -1)
+        });
+    });
 });
 
-var myVar;
+var check;
 
-function temporisposta() {
-  myVar = setTimeout(inviarisposta, 1000);
+function tempoRisposta() {
+  check = setTimeout(inviaRisposta, 1000);
 }
 
-function inviarisposta() {
+function inviaRisposta() {
     message = "<div class='messaggio ricevuto bianco'>ok</div>";
     $(message).appendTo($('.messaggi-main'));
     $('.msg').val('');
 }
 
-function invia_messaggio() {
+function inviaMessaggio() {
     risposta = $('.msg').val();
     if (risposta.length != 0) {
         message = "<div class='messaggio spedito verde'>" + risposta + "</div>";
