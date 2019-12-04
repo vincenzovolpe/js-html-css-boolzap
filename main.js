@@ -63,6 +63,11 @@ $(document).ready(function() {
         $(this).addClass('attivo');
     });
 
+    // Evento click sull'icona nel messaggio verde
+    $(document).on('click', '.messaggio i', function(){
+        $('.messaggio-pannello').toggle();
+    });
+
     function tempoRisposta() {
       setTimeout(inviaRisposta, 1000);
     }
@@ -76,8 +81,13 @@ $(document).ready(function() {
     function inviaMessaggio() {
         risposta = $('.msg').val();
         if (risposta.length != 0) {
+            data = new Date();
+            time = data.getHours() + ":" + data.getMinutes();
+            console.log(time);
+            tempo = '<small class="messaggio-tempo">' + time + '</small>';
             icona = '<i class="fa fa-chevron-down"></i>';
-            message = "<div class='messaggio spedito verde'>" + risposta + icona +"</div>";
+            pannello = '<div class="messaggio-pannello"><div class="messaggio-pannello-info">Info messaggio</div><div class="messaggio-pannello-cancella">Cancella messaggio</div></div>';
+            message = "<div class='messaggio spedito verde'><span>" + risposta + "</span>" + icona + tempo + pannello + "</div>";
             $(message).appendTo($('.messaggi-main .chat.attivo'));
             tempoRisposta();
             $('.msg').val('');
