@@ -61,7 +61,7 @@ function inviaMessaggio() {
     if (risposta.length != 0) {
         message = "<div class='messaggio spedito verde'>" + risposta + "</div>";
         $(message).appendTo($('.messaggi-main'));
-        $('.msg').val('');
         tempoRisposta();
+        $('.msg').val('');
     }
 }
