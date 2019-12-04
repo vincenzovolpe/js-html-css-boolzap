@@ -65,7 +65,13 @@ $(document).ready(function() {
 
     // Evento click sull'icona nel messaggio verde
     $(document).on('click', '.messaggio i', function(){
-        $('.messaggio-pannello').toggle();
+        $(this).css("visibility", "visible");
+        $(this).siblings('.messaggio-pannello').toggle();
+    });
+
+    // Evento click su cancella inviaMessaggio
+    $(document).on('click', '.messaggio-pannello-cancella', function(){
+        $(this).closest('.messaggio').remove();
     });
 
     function tempoRisposta() {
