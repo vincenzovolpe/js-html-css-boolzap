@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    // Setto le width degli avater presenti nelle notifiche
+    // Setto le width degli avatar presenti nelle notifiche
     var heightNotificheAvatar = $('.utenti-notifiche-avatar').height();
     $('.utenti-notifiche-avatar').width(heightNotificheAvatar);
 
@@ -16,14 +16,12 @@ $(document).ready(function() {
     // Evento click sul microfono
     $('.messaggio-vocale').click(function(){
         inviaMessaggio();
-        tempoRisposta();
     });
 
     // Evento enter nell'input del messaggio che mi crea il messaggio
     $('.msg').keypress(function(event){
     	if(event.which == '13'){
             inviaMessaggio();
-            tempoRisposta();
     	}
     });
 
@@ -31,9 +29,9 @@ $(document).ready(function() {
     $('.msg').keyup(function(event){
         var risposta = $('.msg').val();
         if (risposta.length != 0) {
-            $('.messaggio-vocale>span').removeClass('fas fa-microphone').addClass('fas fa-paper-plane');
+            $('.messaggio-vocale i').removeClass('fas fa-2x fa-microphone').addClass('fas fa-2x fa-paper-plane');
         } else {
-            $('.messaggio-vocale>span').addClass('fas fa microphone').removeClass('fas fa-paper-plane');
+            $('.messaggio-vocale i').addClass('fas fa-2x fa-microphone').removeClass('fas fa-2x fa-paper-plane');
         }
     });
 
@@ -43,15 +41,13 @@ $(document).ready(function() {
         console.log(nomecercato);
 
         $('.utenti-lista-riga').filter(function() {
-            $(this).toggle($(this).text().toLowerCase().indexOf(nomecercato) > -1)
+            $(this).toggle($(this).text().toLowerCase().indexOf(nomecercato) > -1);
         });
     });
 });
 
-var check;
-
 function tempoRisposta() {
-  check = setTimeout(inviaRisposta, 1000);
+  setTimeout(inviaRisposta, 1000);
 }
 
 function inviaRisposta() {
@@ -66,5 +62,6 @@ function inviaMessaggio() {
         message = "<div class='messaggio spedito verde'>" + risposta + "</div>";
         $(message).appendTo($('.messaggi-main'));
         $('.msg').val('');
+        tempoRisposta();
     }
 }
