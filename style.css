@@ -149,6 +149,15 @@
     padding: 15px;
     display: flex;
     align-items: center;
+    cursor: pointer;
+}
+
+.utenti-lista-riga:hover {
+    background: #f4f5f5;
+}
+
+.utenti-sfondo {
+    background: #f4f5f5;
 }
 
 .attivo {
@@ -168,6 +177,12 @@
 
 .utenti-lista-msg {
     padding-left: 15px;
+    width: 100%;
+}
+
+.utenti-lista-msg-nome {
+    display: flex;
+    justify-content: space-between;
 }
 
 .messaggi {
@@ -239,6 +254,15 @@
     margin: 50px;
 }
 
+.messaggio.spedito i {
+    display: none;
+}
+
+.messaggio.spedito:hover i{
+    display: block;
+    float: right;
+}
+
 .spedito {
     float: right;
     background-color: #DCF8C6;
@@ -285,4 +309,11 @@
 
 .nascondi {
     display: none;
+}
+.chat{
+    display: none;
+}
+
+.chat.attivo {
+    display: block;
 }
