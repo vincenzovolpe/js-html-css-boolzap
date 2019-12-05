@@ -262,7 +262,7 @@
     font-size: 10px;
 }
 
-.messaggio.spedito i {
+.messaggio i {
     visibility: hidden;
     float: right;
     position: absolute;
@@ -271,11 +271,11 @@
     color: gray;
 }
 
-.messaggio.spedito:hover i{
+.messaggio:hover i{
     visibility: visible;
 }
 
-.messaggio.spedito i.selected, .messaggio.spedito i.selected:hover {
+.messaggio i.selected, .messaggio i.selected:hover {
     visibility: visible;
 }
 
