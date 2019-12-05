@@ -357,3 +357,7 @@
 .messaggio-pannello > div:hover {
 	color: #B6B9BB;
 }
+
+.template {
+	display: none;
+}

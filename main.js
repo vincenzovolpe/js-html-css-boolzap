@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    // Setto le width degli avatar presenti nelle notifiche
+    // Setto le width degli avatar prespeditoi nelle notifiche
     var heightNotificheAvatar = $('.utenti-notifiche-avatar').height();
     $('.utenti-notifiche-avatar').width(heightNotificheAvatar);
 
@@ -13,15 +13,46 @@ $(document).ready(function() {
     $('.messaggi-header-avatar img').width(heightHeaderAvatar);
     // Fine settaggio delle larghezzhe
 
+    // Popoliamo i contenitori dei messaggi
+    // Scorro tutte le chat contenute nell'oggetto conversazioni
+    for (var codice_conversazione in conversazioni) {
+
+        //var contenitore_messaggi = '<div  data-chat="' + codice_conversazione +'" class="chat"></div>';
+        var contenitore_messaggi = $('.template .chat').clone();
+        contenitore_messaggi.attr('data-chat', codice_conversazione);
+
+        // Recupero i messaggi della conversazione corrente
+        var messaggi = conversazioni[codice_conversazione];
+        // Ciclo tutti i messaggi di questa conversazione
+        for (var i = 0; i < messaggi.length; i++) {
+            // recupero un messaggio alla volta di questa conversazione
+            var singolo_messaggio  = messaggi[i];
+            // Recupero il teso del messaggio
+            var testo_messaggio = singolo_messaggio.testo;
+            // Recupero il tipo di messaggio che diventra la classe spedito verde o ricevuto bianco
+            var tipo_messaggio = singolo_messaggio.direzione;
+            // Clono il template del messaggio
+            var nuovo_messaggio = $('.template .messaggio').clone();
+            // Inserisco nello span corretto il testo del messaggio
+            nuovo_messaggio.children('.messaggio-testo').text(testo_messaggio);
+            // Aggiungo le classi corrette al div messaggio
+            nuovo_messaggio.addClass(tipo_messaggio);
+            // Inserisco il messaggio all'interno del container
+            contenitore_messaggi.append(nuovo_messaggio);
+            // Risposta del pc coon scritto ok mandata dopo 1 secondo
+        }
+        $('.messaggi-main').append(contenitore_messaggi);
+    }
+
     // Evento click sul microfono
     $(document).on('click', '.messaggio-vocale', function(){
-        inviaMessaggio();
+        inviaMessaggioDue();
     });
 
     // Evento enter nell'input del messaggio che mi crea il messaggio
     $(document).on('keypress', '.msg', function(){
     	if(event.which == '13'){
-            inviaMessaggio();
+            inviaMessaggioDue();
     	}
     });
 
@@ -85,15 +116,18 @@ $(document).ready(function() {
     });
 
     function tempoRisposta() {
-      setTimeout(inviaRisposta, 1000);
+      //setTimeout(inviaRisposta, 1000);
+      setTimeout(inviaRispostaDue, 1000);
     }
 
-    function inviaRisposta() {
+    // Funzione inviaRisposta funzionante senza il template
+    /*function inviaRisposta() {
         message = "<div class='messaggio ricevuto bianco'>ok</div>";
         $(message).appendTo($('.messaggi-main .chat.attivo'));
         $('.msg').val('');
     }
 
+    // Funzione inviaMessaggio funzionante senza il template
     function inviaMessaggio() {
         risposta = $('.msg').val();
         if (risposta.length != 0) {
@@ -108,5 +142,125 @@ $(document).ready(function() {
             tempoRisposta();
             $('.msg').val('');
         }
+    }*/
+
+    // Funzione inviaMessaggio funzionante con il template
+    function inviaMessaggioDue() {
+        risposta = $('.msg').val();
+        if (risposta.length != 0) {
+            // Clono il template del messaggio
+            var nuovo_messaggio = $('.template .messaggio').clone();
+            // Inserisco nello span corretto il testo del messaggio
+            nuovo_messaggio.children('.messaggio-testo').text(risposta);
+            // Aggiungo le classi corrette al div messaggio
+            nuovo_messaggio.addClass('spedito verde');
+            // Inserisco il messaggio all'interno del container
+            $('.chat.attivo').append(nuovo_messaggio);
+            // Risposta del pc coon scritto ok mandata dopo 1 secondo
+            tempoRisposta();
+            $('.msg').val('');
+        }
     }
+
+    // Funzione inviaRispostaDue funzionante con il template
+    function inviaRispostaDue() {
+        // Clono il template del messaggio
+        var messaggio_risposta = $('.template .messaggio').clone();
+        // Inserisco nello span corretto il testo del messaggio
+        messaggio_risposta.children('.messaggio-testo').text('ok');
+        // Aggiungo le classi corrette al div messaggio
+        messaggio_risposta.addClass('ricevuto bianco');
+        // Inserisco il messaggio all'interno del container
+        $('.chat.attivo').append(messaggio_risposta);
+    }
+
+    // Simulo il click sul contatto per avere appena apro la pagina una conversazione attiva
+    $('.utenti-lista-riga attivo').trigger('click');
+
 });
+
+
+// Contenitore di tutte le conversazioni
+// Contiene un oggetto per ogni conversazione, in cui la chiave è l'id della conversazione e il valore un array di oggetti messaggio
+var conversazioni = {
+    '1' : [
+        {
+            'testo': 'Ciao Michela',
+            'direzione': 'spedito verde'
+        },
+        {
+            'testo': 'Ciao, come stai?',
+            'direzione': 'ricevuto bianco'
+        }
+    ],
+    '2' : [
+        {
+            'testo': 'Ciao Giovanna',
+            'direzione': 'spedito verde'
+        },
+        {
+            'testo': 'Ciao, come stai?',
+            'direzione': 'ricevuto bianco'
+        }
+    ],
+    '3' : [
+        {
+            'testo': 'Ciao Martina',
+            'direzione': 'spedito verde'
+        },
+        {
+            'testo': 'Ciao, come stai?',
+            'direzione': 'ricevuto bianco'
+        }
+    ],
+    '4' : [
+        {
+            'testo': 'Ciao Lucia',
+            'direzione': 'spedito verde'
+        },
+        {
+            'testo': 'Ciao, come stai?',
+            'direzione': 'ricevuto bianco'
+        }
+    ],
+    '5' : [
+        {
+            'testo': 'Ciao Mario',
+            'direzione': 'spedito verde'
+        },
+        {
+            'testo': 'Ciao, come stai?',
+            'direzione': 'ricevuto bianco'
+        }
+    ],
+    '6' : [
+        {
+            'testo': 'Ciao Paolo',
+            'direzione': 'spedito verde'
+        },
+        {
+            'testo': 'Ciao, come stai?',
+            'direzione': 'ricevuto bianco'
+        }
+    ],
+    '7' : [
+        {
+            'testo': 'Ciao Matteo',
+            'direzione': 'spedito verde'
+        },
+        {
+            'testo': 'Ciao, come stai?',
+            'direzione': 'ricevuto bianco'
+        }
+    ],
+    '8' : [
+        {
+            'testo': 'Ciao Claudia',
+            'direzione': 'spedito verde'
+        },
+        {
+            'testo': 'Ciao, come stai?',
+            'direzione': 'ricevuto bianco'
+        }
+    ]
+};
