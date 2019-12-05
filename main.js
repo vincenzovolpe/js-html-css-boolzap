@@ -49,20 +49,25 @@ $(document).ready(function() {
     // Intercetto il click su un singolo utente nella lista degli utenti per visualizzare la relativa chat
     $(document).on('click', '.utenti-lista-riga', function(){
         // Metto in una variabile il data attributes dell'utente attuale
-        var utentecliccato = $(this).data("chat");
-        // Rimuovo lo sfondo da un utente selezionato in precedenza
-        $(this).siblings().removeClass('attivo');
-        // Ciclo all'interno della chat dei messaggi dell'utente cliccato
-        $('.chat').each(function(index){
-            // Controllo se l'indice del ciclo è uguale al data attribute dell'utente cliccato
-            if (utentecliccato == index + 1) {
-                $('.chat').eq(index).siblings().removeClass('attivo')
-                $('.chat').eq(index).addClass('attivo');
-                return false;
-            }
-        });
+        var utentecliccato = $(this).data("lista");
+        // Rimuovo lo sfondo dalla riga utente che era attiva prima del click
+        $('.utenti-lista-riga').removeClass('attivo');
+        // Nascondo la conversazione attiva al momento dell click
+        $('.chat').removeClass('attivo')
+        // Recupero il pannello con il data-chat corrispondente al data-list del contatto su cui ho cliccato e lo visualizzo
+        $('.chat[data-chat="' + utentecliccato +'"]').addClass('attivo');
         // Imposto lo sfondo alla riga utente cliccata
         $(this).addClass('attivo');
+        // Recupero il nome dell'utente cliccato
+        var nomeutente = $(this).find('.utenti-lista-msg-nome h4').text();
+        // Setto il nome utente  della barra in alto nei messaggi uguale a quello dell'utente cliccato
+        $('.messaggi-header-nome h4').text(nomeutente);
+        // Recupero l'immagine dell'utente cliccato
+        var immagineutente = $(this).find('.utenti-lista-avatar img').attr('src');
+        // Setto l'immagine utente della barra in alto nei messaggi uguale a quello dell'utente cliccato
+        $('.messaggi-header-avatar img').attr('src', immagineutente);
+        // Sposto all'inizio della  lista l'utente cliccato
+        $(this).prependTo('.utenti-lista');
     });
 
     // Evento click sull'icona nel messaggio verde
