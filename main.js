@@ -47,6 +47,7 @@ $(document).ready(function() {
     // Evento click sul microfono
     $(document).on('click', '.messaggio-vocale', function(){
         inviaMessaggioDue();
+        $('.messaggio-vocale i').removeClass('fas fa-2x fa-paper-plane').addClass('fas fa-2x fa-microphone');
     });
 
     // Evento enter nell'input del messaggio che mi crea il messaggio
@@ -62,7 +63,7 @@ $(document).ready(function() {
         if (risposta.length != 0) {
             $('.messaggio-vocale i').removeClass('fas fa-2x fa-microphone').addClass('fas fa-2x fa-paper-plane');
         } else {
-            $('.messaggio-vocale i').addClass('fas fa-2x fa-microphone').removeClass('fas fa-2x fa-paper-plane');
+            $('.messaggio-vocale i').removeClass('fas fa-2x fa-paper-plane').addClass('fas fa-2x fa-microphone');
         }
     });
 
