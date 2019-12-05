@@ -52,7 +52,9 @@ $(document).ready(function() {
         var utentecliccato = $(this).data("chat");
         // Rimuovo lo sfondo da un utente selezionato in precedenza
         $(this).siblings().removeClass('attivo');
+        // Ciclo all'interno della chat dei messaggi dell'utente cliccato
         $('.chat').each(function(index){
+            // Controllo se l'indice del ciclo è uguale al data attribute dell'utente cliccato
             if (utentecliccato == index + 1) {
                 $('.chat').eq(index).siblings().removeClass('attivo')
                 $('.chat').eq(index).addClass('attivo');
@@ -65,12 +67,15 @@ $(document).ready(function() {
 
     // Evento click sull'icona nel messaggio verde
     $(document).on('click', '.messaggio i', function(){
+        // Faccio in modo che l'icona rimane fissa quando esco dall'hover e scompare dopo il click
         $(this).toggleClass("selected");
+        // Rendo visibile il pannello al click sull' icona e lo faccio scomparire se faccio di nuovo click sull'icona
         $(this).siblings('.messaggio-pannello').toggle();
     });
 
     // Evento click su cancella messaggio
     $(document).on('click', '.messaggio-pannello-cancella', function(){
+        // Cancello il primo antenato del div .messaggio-pannello-cancella
         $(this).closest('.messaggio').remove();
     });
 
