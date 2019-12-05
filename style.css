@@ -275,6 +275,10 @@
     visibility: visible;
 }
 
+.messaggio.spedito i.selected, .messaggio.spedito i.selected:hover {
+    visibility: visible;
+}
+
 .spedito {
     float: right;
     background-color: #DCF8C6;

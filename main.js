@@ -65,11 +65,11 @@ $(document).ready(function() {
 
     // Evento click sull'icona nel messaggio verde
     $(document).on('click', '.messaggio i', function(){
-        $(this).css("visibility", "visible");
+        $(this).toggleClass("selected");
         $(this).siblings('.messaggio-pannello').toggle();
     });
 
-    // Evento click su cancella inviaMessaggio
+    // Evento click su cancella messaggio
     $(document).on('click', '.messaggio-pannello-cancella', function(){
         $(this).closest('.messaggio').remove();
     });
