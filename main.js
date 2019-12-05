@@ -101,9 +101,6 @@ $(document).ready(function() {
         $(this).prependTo('.utenti-lista');
     });
 
-    // Simulo il click sul contatto per avere appena apro la pagina una conversazione attiva
-    $('.utenti-lista-riga.attivo').trigger('click');
-
     // Evento click sull'icona nel messaggio verde
     $(document).on('click', '.messaggio i', function(){
         // Faccio in modo che l'icona rimane fissa quando esco dall'hover e scompare dopo il click
@@ -117,11 +114,6 @@ $(document).ready(function() {
         // Cancello il primo antenato del div .messaggio-pannello-cancella
         $(this).closest('.messaggio').remove();
     });
-
-    function tempoRisposta() {
-      //setTimeout(inviaRisposta, 1000);
-      setTimeout(inviaRispostaDue, 1000);
-    }
 
     // Funzione inviaRisposta funzionante senza il template
     /*function inviaRisposta() {
@@ -146,7 +138,10 @@ $(document).ready(function() {
             $('.msg').val('');
         }
     }*/
-
+    function tempoRisposta() {
+      //setTimeout(inviaRisposta, 1000);
+      setTimeout(inviaRispostaDue, 1000);
+    }
     // Funzione inviaMessaggio funzionante con il template
     function inviaMessaggioDue() {
         risposta = $('.msg').val();
@@ -177,6 +172,8 @@ $(document).ready(function() {
         $('.chat.attivo').append(messaggio_risposta);
     }
 
+    // Simulo il click sul contatto per avere appena apro la pagina una conversazione attiva
+    $('.utenti-lista-riga.attivo').trigger('click');
 });
 
 
