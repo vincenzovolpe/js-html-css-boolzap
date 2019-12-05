@@ -158,6 +158,7 @@ $(document).ready(function() {
             // Risposta del pc coon scritto ok mandata dopo 1 secondo
             tempoRisposta();
             $('.msg').val('');
+            // Fissiamo la scrollbar in basso nell'area messaggio
         }
     }
 
@@ -171,6 +172,8 @@ $(document).ready(function() {
         messaggio_risposta.addClass('ricevuto bianco');
         // Inserisco il messaggio all'interno del container
         $('.chat.attivo').append(messaggio_risposta);
+        // Imposto la scoll bar sempre al bottom nell'area messaggi
+        $('.messaggi-main').scrollTop($('.messaggi-main').prop("scrollHeight"));
     }
 
     // Simulo il click sul contatto per avere appena apro la pagina una conversazione attiva
