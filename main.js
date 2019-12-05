@@ -101,6 +101,9 @@ $(document).ready(function() {
         $(this).prependTo('.utenti-lista');
     });
 
+    // Simulo il click sul contatto per avere appena apro la pagina una conversazione attiva
+    $('.utenti-lista-riga.attivo').trigger('click');
+
     // Evento click sull'icona nel messaggio verde
     $(document).on('click', '.messaggio i', function(){
         // Faccio in modo che l'icona rimane fissa quando esco dall'hover e scompare dopo il click
@@ -173,9 +176,6 @@ $(document).ready(function() {
         // Inserisco il messaggio all'interno del container
         $('.chat.attivo').append(messaggio_risposta);
     }
-
-    // Simulo il click sul contatto per avere appena apro la pagina una conversazione attiva
-    $('.utenti-lista-riga attivo').trigger('click');
 
 });
 
