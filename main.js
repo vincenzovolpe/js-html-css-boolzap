@@ -16,7 +16,6 @@ $(document).ready(function() {
     // Popoliamo i contenitori dei messaggi
     // Scorro tutte le chat contenute nell'oggetto conversazioni
     for (var codice_conversazione in conversazioni) {
-
         //var contenitore_messaggi = '<div  data-chat="' + codice_conversazione +'" class="chat"></div>';
         var contenitore_messaggi = $('.template .chat').clone();
         contenitore_messaggi.attr('data-chat', codice_conversazione);
@@ -74,7 +73,9 @@ $(document).ready(function() {
         console.log(nomecercato);
         // Verifico se ci sono valori di testo che corrispondono al valore del campo di input. Il metodo toggle () nasconde la riga che non corrisponde alla ricerca. Usiamo il metodo toLowerCase() per convertire il testo in lettere minuscole, il che rende insensibile il caso di ricerca
         $('.utenti-lista-riga').filter(function() {
-            $(this).toggle($(this).text().toLowerCase().indexOf(nomecercato) > -1);
+            // Memorizzo il percorso giusto dove cercareossia soltanto all'interno del nome presente in h4
+            var percorso = $(this).children('.utenti-lista-msg').children('.utenti-lista-msg-nome').children('h4');
+            $(this).toggle(percorso.text().toLowerCase().indexOf(nomecercato) > -1);
         });
     });
 
@@ -100,6 +101,8 @@ $(document).ready(function() {
         $('.messaggi-header-avatar img').attr('src', immagineutente);
         // Sposto all'inizio della  lista l'utente cliccato
         $(this).prependTo('.utenti-lista');
+        // Imposto la scroll bar sempre al bottom nell'area messaggi
+        $('.messaggi-main').scrollTop($('.messaggi-main').prop("scrollHeight"));
     });
 
     // Evento click sull'icona nel messaggio verde
@@ -129,7 +132,6 @@ $(document).ready(function() {
         if (risposta.length != 0) {
             data = new Date();
             time = data.getHours() + ":" + data.getMinutes();
-            console.log(time);
             tempo = '<small class="messaggio-tempo">' + time + '</small>';
             icona = '<i class="fa fa-chevron-down"></i>';
             pannello = '<div class="messaggio-pannello"><div class="messaggio-pannello-info">Info messaggio</div><div class="messaggio-pannello-cancella">Cancella messaggio</div></div>';
@@ -140,17 +142,20 @@ $(document).ready(function() {
         }
     }*/
     function tempoRisposta() {
-      //setTimeout(inviaRisposta, 1000);
       setTimeout(inviaRispostaDue, 1000);
-    }
+  }
     // Funzione inviaMessaggio funzionante con il template
     function inviaMessaggioDue() {
         risposta = $('.msg').val();
         if (risposta.length != 0) {
+            // Chiamo la funzione per il calcolo dell'orario di invio del messaggio
+            var orarioInvio = oraInvio();
             // Clono il template del messaggio
             var nuovo_messaggio = $('.template .messaggio').clone();
             // Inserisco nello span corretto il testo del messaggio
             nuovo_messaggio.children('.messaggio-testo').text(risposta);
+            // Inserisco nell'elemento small l'orario in cui viene inviato il messaggio
+            nuovo_messaggio.children('.messaggio-tempo').text(orarioInvio);
             // Aggiungo le classi corrette al div messaggio
             nuovo_messaggio.addClass('spedito verde');
             // Inserisco il messaggio all'interno del container
@@ -158,26 +163,45 @@ $(document).ready(function() {
             // Risposta del pc coon scritto ok mandata dopo 1 secondo
             tempoRisposta();
             $('.msg').val('');
+
             // Fissiamo la scrollbar in basso nell'area messaggio
         }
     }
 
     // Funzione inviaRispostaDue funzionante con il template
     function inviaRispostaDue() {
+        // Chiamo la funzione per il calcolo dell'orario di invio del messaggio
+        var orarioRisposta = oraInvio();
         // Clono il template del messaggio
         var messaggio_risposta = $('.template .messaggio').clone();
         // Inserisco nello span corretto il testo del messaggio
         messaggio_risposta.children('.messaggio-testo').text('ok');
+        // Inserisco nell'elemento small l'orario in cui viene inviato il messaggio di risposta
+        messaggio_risposta.children('.messaggio-tempo').text(orarioRisposta);
         // Aggiungo le classi corrette al div messaggio
         messaggio_risposta.addClass('ricevuto bianco');
         // Inserisco il messaggio all'interno del container
         $('.chat.attivo').append(messaggio_risposta);
-        // Imposto la scoll bar sempre al bottom nell'area messaggi
+        // Imposto la scroll bar sempre al bottom nell'area messaggi
         $('.messaggi-main').scrollTop($('.messaggi-main').prop("scrollHeight"));
+        // Inserisco nell'elemento h4 dell'utente attivo i primi 50 caratteri dell'ultimo messaggio che ha ricevuto
+        $('.utenti-lista-riga.attivo').children('.utenti-lista-msg').children('.utenti-lista-msg-testo').children('p').text(risposta);
+        // Inserisco nell'elemento small dell'utente attivo l'orario dell'ultimo messaggio che ha ricevuto
+        $('.utenti-lista-riga.attivo').children('.utenti-lista-msg').children('.utenti-lista-msg-nome').children('small').text(orarioRisposta);
+        // Inserisco nell'elemento small dell'utente attivo l'orario dell'ultimo accesso che ha ricevuto
+        $('.messaggi-header-accesso').children('p').children('span').text(orarioRisposta);
+    }
+
+    function oraInvio() {
+        data = new Date();
+        // Ottengo orario e minuto; sui minuti uso una funzione per farmi restituire lo zero davanti se miuti è minore di 10
+        time = data.getHours() + ":" + String(data.getMinutes()).padStart(2, '0');
+        return time;
     }
 
     // Simulo il click sul contatto per avere appena apro la pagina una conversazione attiva
     $('.utenti-lista-riga.attivo').trigger('click');
+
 });
 
 
