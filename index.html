@@ -3,6 +3,7 @@
     <head>
         <meta charset="utf-8">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
         <script src="main.js" charset="utf-8"></script>
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
         <link rel="stylesheet" href="style.css">
@@ -247,7 +248,7 @@
         </div>
 
         <!--Template del messaggio e delle chat-->
-        <div class="template">
+        <!--<div class="template">
                 <div class="messaggio">
                     <span class="messaggio-testo">Inserisci il messaggio con js</span>
                     <i class="fa fa-chevron-down"></i>
@@ -257,7 +258,23 @@
                         <div class="messaggio-pannello-cancella">Cancella messaggio</div>
                     </div>
                 </div>
-                <div data-chat='0' class="chat"></div>
-        </div>
+                <div data-chat="0" class="chat"></div>
+        </div>-->
+        <!-- Template codice conversazione -->
+        <script id="template-conversazione" type="text/x-handlebars-template">
+            <div data-chat="{{codice}}" class="chat"></div>
+        </script>
+        <!-- Template messaggio -->
+        <script id="template" type="text/x-handlebars-template">
+            <div class="messaggio {{direzione}}">
+                <span class="messaggio-testo">{{testo}}</span>
+                <i class="fa fa-chevron-down"></i>
+                <small class="messaggio-tempo">{{tempo}}</small>
+                <div class="messaggio-pannello">
+                    <div class="messaggio-pannello-info">Info messaggio</div>
+                    <div class="messaggio-pannello-cancella">Cancella messaggio</div>
+                </div>
+            </div>
+        </script>
     </body>
 </html>

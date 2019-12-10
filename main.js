@@ -13,12 +13,27 @@ $(document).ready(function() {
     $('.messaggi-header-avatar img').width(heightHeaderAvatar);
     // Fine settaggio delle larghezzhe
 
+    // Recupero l'html del template del messaggio
+    var template_html = $('#template').html();
+    // Compilo l'html  con la funzione di handlebars
+    var template_function = Handlebars.compile(template_html);
+
+    // Recupero l'html del template della conversazione
+    var template_conversazione_html = $('#template-conversazione').html();
+    // Compilo l'html  con la funzione di handlebars
+    var template_conversazione_function = Handlebars.compile(template_conversazione_html);
+
     // Popoliamo i contenitori dei messaggi
     // Scorro tutte le chat contenute nell'oggetto conversazioni
     for (var codice_conversazione in conversazioni) {
+        var variabili_conversazione = {
+            'codice': codice_conversazione
+        };
+        var contenitore_messaggi = template_conversazione_function(variabili_conversazione);
+        $('.messaggi-main').append(contenitore_messaggi);
         //var contenitore_messaggi = '<div  data-chat="' + codice_conversazione +'" class="chat"></div>';
-        var contenitore_messaggi = $('.template .chat').clone();
-        contenitore_messaggi.attr('data-chat', codice_conversazione);
+        //var contenitore_messaggi = $('.template .chat').clone();
+        //contenitore_messaggi.attr('data-chat', codice_conversazione);
 
         // Recupero i messaggi della conversazione corrente
         var messaggi = conversazioni[codice_conversazione];
@@ -30,6 +45,13 @@ $(document).ready(function() {
             var testo_messaggio = singolo_messaggio.testo;
             // Recupero il tipo di messaggio che diventra la classe spedito verde o ricevuto bianco
             var tipo_messaggio = singolo_messaggio.direzione;
+
+            var variabili = {
+                'testo': testo_messaggio,
+                'direzione': tipo_messaggio
+            };
+            var nuovo_messaggio = template_function(variabili);
+            /*
             // Clono il template del messaggio
             var nuovo_messaggio = $('.template .messaggio').clone();
             // Inserisco nello span corretto il testo del messaggio
@@ -37,10 +59,9 @@ $(document).ready(function() {
             // Aggiungo le classi corrette al div messaggio
             nuovo_messaggio.addClass(tipo_messaggio);
             // Inserisco il messaggio all'interno del container
-            contenitore_messaggi.append(nuovo_messaggio);
-            // Risposta del pc coon scritto ok mandata dopo 1 secondo
+            */
+            $('.chat[data-chat="' + codice_conversazione + '"]').append(nuovo_messaggio);
         }
-        $('.messaggi-main').append(contenitore_messaggi);
     }
 
     // Evento click sul microfono
@@ -150,14 +171,22 @@ $(document).ready(function() {
         if (risposta.length != 0) {
             // Chiamo la funzione per il calcolo dell'orario di invio del messaggio
             var orarioInvio = oraInvio();
+            // Preparo le variabili da sostituire nel template
+            var variabili = {
+                'testo': risposta,
+                'tempo': orarioInvio,
+                'direzione': 'spedito verde'
+            };
+            var nuovo_messaggio = template_function(variabili);
             // Clono il template del messaggio
-            var nuovo_messaggio = $('.template .messaggio').clone();
+            /*var nuovo_messaggio = $('.template .messaggio').clone();
             // Inserisco nello span corretto il testo del messaggio
             nuovo_messaggio.children('.messaggio-testo').text(risposta);
             // Inserisco nell'elemento small l'orario in cui viene inviato il messaggio
             nuovo_messaggio.children('.messaggio-tempo').text(orarioInvio);
             // Aggiungo le classi corrette al div messaggio
             nuovo_messaggio.addClass('spedito verde');
+            */
             // Inserisco il messaggio all'interno del container
             $('.chat.attivo').append(nuovo_messaggio);
             // Risposta del pc coon scritto ok mandata dopo 1 secondo
@@ -172,7 +201,14 @@ $(document).ready(function() {
     function inviaRispostaDue() {
         // Chiamo la funzione per il calcolo dell'orario di invio del messaggio
         var orarioRisposta = oraInvio();
-        // Clono il template del messaggio
+        // Preparo le variabili da sostituire nel template
+        var variabili = {
+            'testo': 'ok',
+            'tempo': orarioRisposta,
+            'direzione': 'ricevuto bianco'
+        };
+        var messaggio_risposta = template_function(variabili);
+        /*// Clono il template del messaggio
         var messaggio_risposta = $('.template .messaggio').clone();
         // Inserisco nello span corretto il testo del messaggio
         messaggio_risposta.children('.messaggio-testo').text('ok');
@@ -180,6 +216,7 @@ $(document).ready(function() {
         messaggio_risposta.children('.messaggio-tempo').text(orarioRisposta);
         // Aggiungo le classi corrette al div messaggio
         messaggio_risposta.addClass('ricevuto bianco');
+        */
         // Inserisco il messaggio all'interno del container
         $('.chat.attivo').append(messaggio_risposta);
         // Imposto la scroll bar sempre al bottom nell'area messaggi
