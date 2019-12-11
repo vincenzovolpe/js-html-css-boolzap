@@ -222,7 +222,7 @@ $(document).ready(function() {
         // Imposto la scroll bar sempre al bottom nell'area messaggi
         $('.messaggi-main').scrollTop($('.messaggi-main').prop("scrollHeight"));
         // Inserisco nell'elemento h4 dell'utente attivo i primi 50 caratteri dell'ultimo messaggio che ha ricevuto
-        $('.utenti-lista-riga.attivo').children('.utenti-lista-msg').children('.utenti-lista-msg-testo').children('p').text(risposta);
+        $('.utenti-lista-riga.attivo').children('.utenti-lista-msg').children('.utenti-lista-msg-testo').children('p').text(risposta.slice(0,80) + '...');
         // Inserisco nell'elemento small dell'utente attivo l'orario dell'ultimo messaggio che ha ricevuto
         $('.utenti-lista-riga.attivo').children('.utenti-lista-msg').children('.utenti-lista-msg-nome').children('small').text(orarioRisposta);
         // Inserisco nell'elemento small dell'utente attivo l'orario dell'ultimo accesso che ha ricevuto
